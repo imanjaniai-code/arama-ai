@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "آراما — هوش مصنوعی سلامت روان"
+version = "1.0.0"
+id = "artifacts/arama"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22237
+
+[services.development]
+run = "pnpm --filter @workspace/arama run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/arama", "run", "build" ]
+publicDir = "artifacts/arama/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22237"
+BASE_PATH = "/"
